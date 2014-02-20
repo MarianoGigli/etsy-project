@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>Etsy search project</title>
+
+      <link rel="stylesheet" href="statics/css/style.css">
+      <script type="text/javascript" src="statics/js/doT.min.js"></script>
+      <script type="text/javascript" src="statics/js/app.js"></script>
+    </head>
+
+    <body>
+        <div id="form-wrapper">
+        <h1>Etsy search</h1>
+            <form id="search">
+                <input type="search" name="query" id="query" placeholder="Search"/>
+                <label for="order">Filter by:</label>
+                <select name="order" id="order">
+                    <option value="created">Created</option>
+                    <option value="price">Price</option>
+                    <option value="score">Score</option>/
+                </select>
+                <select name="direction" id="direction">
+                    <option value="down">Desc</option>
+                    <option value="up">Up</option>
+                </select>
+                <select name="price" id="price">
+                    <option value="0">All</option>
+                    <option value="100;200">100 - 200</option>
+                    <option value="200;500">200 - 500</option>
+                    <option value="1000">+1000</option>
+                </select>
+                <input type="submit" value="Search" />
+            </form>
+        </div>
+        <div id='results'></div>
+        <div id='paginator'></div>
+
+        <script id="no-result-tpl" type="text/x-dot-template">
+            <h1 class="no-result">{{=it.get('message') }}</h1>
+        </script>
+
+        <script id="item-tpl" type="text/x-dot-template">
+            <h1 class="title"><a href="{{=it.get('url')}}" target="_blank">{{=it.get('title') }}</a></h1>
+            <h3 class="category">Categories: {{=it.category() }}</h3>
+            <div class="item-content">
+                <img src="{{=it.image_url() }}">
+                <p class="description"> {{=it.get('description') }} </p>
+                <div class="info">
+                    <span class="price">Price: ({{=it.get('currency_code')}}) {{=it.get('price') }} </span>
+                    <a class="view-more" href="{{=it.get('url')}}" target="_blank">More &raquo;</a>
+                </div>
+            </div>
+            {{? it.get('tags') }}
+                <ul class="item-tags">
+                    {{~it.get('tags') :value:index}}
+                        <li>{{=value}}</li>
+                    {{~}}
+                </ul>
+            {{?}}
+        </script>
+
+        <script id="pagination-tpl" type="text/x-dot-template">
+          {{? it.get_last() > 1 }}
+            <ul id="paginator-items">
+                {{? it.get_current() != 1 }}
+                    <li><a href="#" data-page="1"> First Page </a></li>
+                    <li><a href="#" data-page="{{=it.get_prev()}}">Previous </a></li>
+                {{?}}
+                {{~it.get_segment(it.get_current(),it.get_current()-3,-1) :value:index}}
+                    <li><a href="#" data-page="{{=value}}">{{=value}}</a></li>
+                {{~}}
+                <li class="current"><a href="#"> {{=it.get_current()}} of ({{=it.get_last()}}) </a></li>
+                {{~it.get_segment(it.get_current(),it.get_current()+3,1) :value:index}}
+                    <li><a href="#" data-page="{{=value}}">{{=value}}</a></li>
+                {{~}}
+                {{? it.get_last() != it.get_current() }}
+                    <li><a href="#" data-page="{{=it.get_next()}}"> Next </a></li>
+                    <li><a href="#" data-page="{{=it.get_last()}}"> Last Page </a></li>
+                {{?}}
+            </ul>
+          {{?}}
+        </script>
+        <script type="text/javascript">
+            var app = new App('search', 'results', 'paginator-items');
+        </script>
+    </body>
+</html>
