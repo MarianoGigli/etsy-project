@@ -48,6 +48,7 @@
                 <img src="{{=it.image_url() }}">
                 <p class="description"> {{=it.get('description') }} </p>
                 <div class="info">
+                    <a class="view-more delete" data-id="{{=it.get('listing_id')}}" href="#" target="_blank">Remove</a>
                     <span class="price">Price: ({{=it.get('currency_code')}}) {{=it.get('price') }} </span>
                     <a class="view-more" href="{{=it.get('url')}}" target="_blank">More &raquo;</a>
                 </div>
