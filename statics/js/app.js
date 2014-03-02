@@ -19,7 +19,7 @@ Router.prototype = {
         window.location.hash = url_hash;
     },
     parse_uri: function(uri){
-        var patern = {
+        var pattern = {
             keywords: /keywords\/([^\/&]+)/,
             sort_on: /sort_on\/(created|price|score)/,
             sort_order: /sort_order\/(up|down)/,
@@ -28,26 +28,26 @@ Router.prototype = {
             page: /page\/([0-9]+)/
         };
         var extra_params = {};
-        if (typeof uri.match(patern.keywords) !== 'undefined' && uri.match(patern.keywords) !== null){
-            extra_params.keywords = uri.match(patern.keywords)[1];
+        if (typeof uri.match(pattern.keywords) !== 'undefined' && uri.match(pattern.keywords) !== null){
+            extra_params.keywords = uri.match(pattern.keywords)[1];
         }
-        if (typeof uri.match(patern.sort_on) !== 'undefined' && uri.match(patern.sort_on) !== null){
-            extra_params.sort_on = uri.match(patern.sort_on)[1];
+        if (typeof uri.match(pattern.sort_on) !== 'undefined' && uri.match(pattern.sort_on) !== null){
+            extra_params.sort_on = uri.match(pattern.sort_on)[1];
         }
-        if (typeof uri.match(patern.sort_order) !== 'undefined' && uri.match(patern.sort_order) !== null){
-            extra_params.sort_order = uri.match(patern.sort_order)[1];
+        if (typeof uri.match(pattern.sort_order) !== 'undefined' && uri.match(pattern.sort_order) !== null){
+            extra_params.sort_order = uri.match(pattern.sort_order)[1];
         }
-        if (typeof uri.match(patern.price) !== 'undefined' && uri.match(patern.price) !== null){
-            extra_params.price = uri.match(patern.price)[1];
+        if (typeof uri.match(pattern.price) !== 'undefined' && uri.match(pattern.price) !== null){
+            extra_params.price = uri.match(pattern.price)[1];
         }
-        if (typeof uri.match(patern.min_price) !== 'undefined' && uri.match(patern.min_price) !== null){
-            extra_params.min_price = uri.match(patern.min_price)[1];
+        if (typeof uri.match(pattern.min_price) !== 'undefined' && uri.match(pattern.min_price) !== null){
+            extra_params.min_price = uri.match(pattern.min_price)[1];
         }
-        if (typeof uri.match(patern.max_price) !== 'undefined' && uri.match(patern.max_price) !== null){
-            extra_params.max_price = uri.match(patern.max_price)[1];
+        if (typeof uri.match(pattern.max_price) !== 'undefined' && uri.match(pattern.max_price) !== null){
+            extra_params.max_price = uri.match(pattern.max_price)[1];
         }
-        if (typeof uri.match(patern.page) !== 'undefined' && uri.match(patern.page) !== null){
-            extra_params.page = uri.match(patern.page)[1];
+        if (typeof uri.match(pattern.page) !== 'undefined' && uri.match(pattern.page) !== null){
+            extra_params.page = uri.match(pattern.page)[1];
         }
         return extra_params;
     },
